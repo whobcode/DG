@@ -1,54 +1,28 @@
-# Documentation Generator
+# Documentation Generator (DG)
 
-**Category**: Build/Dev Tool
+Paste source code, get AI-generated documentation in Markdown — on Cloudflare Workers
+(TypeScript + Hono + Workers AI). Four output styles: API reference, README overview,
+inline-commented code, or a beginner tutorial. Originally specced as a Python tool — rebuilt on Cloudflare.
 
-An intelligent documentation generator that extracts Python docstrings and enhances them with AI-generated explanations and examples.
+## Features
+- Paste any code; auto-detect or specify the language
+- Choose a documentation style (reference / readme / inline / tutorial)
+- Live Markdown preview (marked.js) and copy-to-clipboard
 
-## Features (Planned)
-- Parse Python files for docstrings
-- AI-enhanced documentation with examples
-- Multiple output formats (Markdown, HTML, JSON)
-- API reference generation
-- Usage example generation
-- Cross-reference linking
-- Searchable documentation site
-
-## Installation
-
+## Run
 ```bash
-npm install -g doc-generator
+npm install
+npm run dev
 ```
 
-## Usage
-
+## Deploy
 ```bash
-dg generate ./src        # Generate docs
-dg enhance ./docs        # AI-enhance existing docs
-dg serve                 # Serve docs locally
-dg build                 # Build static site
+npm run deploy
 ```
 
-## Tech Stack
-- Node.js + AST parsing
-- Workers AI for documentation enhancement
-- Marked for Markdown rendering
-- Highlight.js for code blocks
+## API
+- `POST /api/generate` `{ code, language?, style? }` → `{ documentation }` (Markdown)
+- `GET  /api/styles` → available styles
 
-## Project Structure
-
-```
-DG/
-├── src/
-│   ├── cli.js          # Entry point
-│   ├── parser.js       # Python parser
-│   ├── generator.js    # Doc generator
-│   └── enhancer.js     # AI enhancer
-├── templates/          # Output templates
-├── bin/
-│   └── dg              # Executable
-└── package.json
-```
-
-## License
-
-MIT
+## Stack
+Cloudflare Workers · Hono · Workers AI (Llama 3.1) · marked.js
